@@ -79,7 +79,10 @@ Chat.prototype = {
                 $(".showBox ul").append(userType); //广播用户行为
                 $(".showUser span").text(userCount);//显示在线人数
                 $(".showUser ul").html(all.join(""));//显示在线用户列表
-		if(type == "login"){sound[0].play();}     
+		var uname = sessionStorage.getItem("nickName");
+                if(type == "login" && nickName != uname){
+                    sound[0].play();
+                }     
             });
             //消息发送
             /*发送信息 start*/
