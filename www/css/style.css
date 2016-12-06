@@ -1,0 +1,313 @@
+body{font-family: "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial, "Microsoft Yahei UI", SimHei, "\5B8B\4F53", simsun, sans-serif;}
+/*index css start*/
+/*大背景*/
+.bg-img{
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-image: url(../images/bg.png);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    }
+.logo{
+    display: block;
+    width:100%;
+    position: absolute;
+    top:42%;
+}
+.biliao a{
+    position:relative;
+    display:inline-block;
+    text-decoration: none;
+}
+.biliao a span{
+    display: block;
+    position: absolute;
+    bottom:-20px;
+    color:black;
+    margin-left:35px;
+}
+.biliao a:hover span{color:white;}
+.biliao img{
+    display: inline;
+}
+.summary{
+    width:100%;
+    position: absolute;
+    bottom:-150px;
+    font-size: 1.3em;
+    font-weight: 600;
+}
+@media screen and (max-width: 769px){
+    .biliao img{
+       width:100px;
+    }
+    .biliao a span{
+        font-size: 0.7em;
+        margin-left:25px;
+    }
+    .summary{
+        bottom:-160px;
+    }
+}
+@media screen and (max-width: 320px){
+    .summary{
+        bottom:-100px;
+    }
+}
+.img-box{
+    display: inline-block;
+    position:relative;
+}
+.img-box ul{
+    padding:0;
+    margin:0;
+    position:absolute;
+    list-style: none;
+    left:-116px;
+    top:-75px;
+}
+.img-box ul li{
+    margin:10px;
+    padding:25px;
+    border-radius: 50%;
+    position:relative;
+    z-index: 3;
+}
+.img-box ul li:nth-of-type(1){
+    left:44px;
+    background-color: red;
+}
+.img-box ul li:nth-of-type(2){
+    left:10px;
+    background-color: blue;
+}
+.img-box ul li:nth-of-type(3){
+     left:0px;
+    background-color: yellow;
+}
+.img-box ul li:nth-of-type(4){
+      left:10px;
+    background-color: limegreen;
+}
+.img-box ul li:nth-of-type(5){
+       left:44px;
+    background-color: deeppink;
+   }
+.img-box ul li p{
+    position: absolute;
+    z-index: 0;
+    padding:1px 0px;
+    background-color: white;
+    left:39px;
+    transform-origin: left;
+}
+.img-box ul li:nth-of-type(1) p{
+    top:38px;
+    width:71px;
+    transform: rotate(37deg);
+}
+.img-box ul li:nth-of-type(2) p{
+    top:30px;
+    left:35px;
+    width:77px;
+    transform: rotate(17deg);
+}
+.img-box ul li:nth-of-type(3) p{
+    width:250px;
+    height:2px;
+}
+.img-box ul li:nth-of-type(4) p{
+    top:18px;
+    width:74px;
+    transform: rotate(-17deg);
+}
+.img-box ul li:nth-of-type(5) p{
+    top:6px;
+    width:80px;
+    transform: rotate(-41deg);
+}
+.nickName{
+    width:280px;
+    height:90px;
+    position:absolute;
+    left:182px;
+    bottom:-8px;
+    opacity: 0.9;
+}
+.nickName .form-control{
+    width:180px;
+    height:52px;
+    border-radius: 0;
+    outline: none;
+    border:none;
+    font-size: 22px;
+}
+.img-responsive{position: relative;z-index: 3;}
+.nickName .glyphicon-remove{
+    font-size: 23px;
+    left:-51px;
+    top:0;
+    border-radius: 0;
+    border:none;
+}
+.nickName .glyphicon-arrow-right{
+    position: absolute;
+    right:-23px;
+    width:60px;
+    height:51px;
+    line-height: 52px;
+    font-size: 23px;
+    border-radius: 0;
+    border:none;
+    background-color: black;
+    color:white;
+    opacity: 0.4;
+}
+.nickName .glyphicon{cursor:pointer;}
+#notice{
+    position:absolute;
+    left:0;
+    bottom:-25px;
+    color:darkred;
+}
+/*index css end*/
+
+/*chatRoom css start*/
+.roomBg{
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: purple;
+    background-attachment: fixed;
+    background-size: cover;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+}
+.r-header{
+    padding:15px 0;
+    border:1px solid;
+    background-color: rgba(255,255,255,0.3);
+}
+.r-header span:first-child{
+    padding:5px;
+    margin-left:20px;
+    color:rgba(255,255,255,0.5);
+    font-size: 40px;
+    background-color: purple;
+    border-radius: 50%;
+    cursor:pointer;
+}
+.r-header span:nth-of-type(2){
+    font-size: 38px;
+    padding-left:20px;
+    position:relative;
+    bottom:5px;
+    color:rgba(255,255,255,0.6);
+}
+
+.showBox .list-group {
+    padding:10px 15px;
+    margin:3px 0;
+    height:38em;
+    background:rgba(255,255,255,0.6);
+    overflow: auto;
+}
+.showBox .list-group li{
+    border:none;
+    border-bottom: 1px solid white;
+    border-radius: 0;
+  background:none;
+}
+.showUser .list-group {
+    height:37em;
+    padding:10px 15px;
+    margin:3px 0;
+    background:rgba(0,0,0,0.2);
+    overflow: auto;
+    color:white;
+}
+.showUser .list-group li{
+    border:none;
+    border-radius: 0;
+    background:none;
+    background-color: purple;
+    margin-bottom: 3px;
+}
+.showUser p{
+    background-color: rgba(0,0,0,0.5);
+    margin:0;
+    padding:5px 0;
+    font-size: 1.5em;
+    color:white;
+    margin-top:3px;
+}
+#text{
+    width:100%;
+    margin-top:5px;
+    font-size: 1.5em;
+    resize:none;
+}
+#send{
+    width:100%;
+    margin-top:5px;
+    font-size: 2em;
+    padding:11px 0;
+    border-radius:0;
+    background-color:darkred;
+    color:white;
+    border:none;
+    outline: none;
+}
+@media screen and (max-width: 414px){
+   #send{font-size:1.5em;padding:17px 0px;}
+    .u-btn{margin:0;padding:0 10px;}
+    .u-btn-r{left:-5px;}
+    .u-btn-l{left:5px;}
+}
+.files{
+    position: relative;
+    bottom:-5px;
+}
+.files input{
+    float: left;
+    display: inline-block;
+    margin-right:5px;
+}
+#sendImage {
+    color:black;
+    border:1px solid #A6A6A6;background-color: #F1F1F1;border-radius: 0;
+    display: inline-block;
+    padding:2px 10px;
+    overflow: hidden;
+    float: left;
+    position: relative;
+    margin-right:5px;
+}
+#sendImage1{
+    position:absolute; right:0; top:0; font-size:20px; opacity:0; filter:alpha(opacity=0);
+}
+.emoji-container{
+    position:absolute;
+    left:0;
+    bottom:40px;
+    width:131%;
+    height:140px;
+    display: none;
+    overflow: auto;
+    z-index: 999;
+    /*background-color:rgba(0,0,0,0.3) ;*/
+}
+.emoji-container img{
+    float: left;
+    width:40px;
+    height:40px;
+    margin-right:7px;
+    margin-bottom:7px;
+}
+/*chatRoom css end*/
