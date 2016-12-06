@@ -1,14 +1,14 @@
 {
 	"name": "BeeChat",
 	"description": "Be close via BeeChat,",
-	"version": "1.0",
+	"version": "0.4.0",
 	"main": "server.js",
 	"dependencies": {
-		"express": "4.14.0",
-		"socket.io": "1.7.1",
+		"express": "3.4.x",
+		"socket.io": "0.9.x",
 	},
 	"engines": {
-		"node": "4.4.4",
-		"npm": "2.15.1"
+		"node": "0.10.x",
+		"npm": "1.2.x"
 	}
 }
