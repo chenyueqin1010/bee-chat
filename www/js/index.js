@@ -53,7 +53,8 @@ Chat.prototype = {
                         that.socket.on("Existed",function(){ //昵称验证->不可用
                             $("#notice").text("昵称已占用");
                         });
-                        that.socket.on("notExist",function(){ //昵称验证->可用
+                        that.socket.on("notExist",function(){//昵称验证->可用
+                            sessionStorage.setItem("nickName",nickName);
                             $("#notice").text("");
                             $(".index").css("display","none");
                             $(".chatRoom").css("display","block");
@@ -78,11 +79,11 @@ Chat.prototype = {
             //消息发送
             /*发送信息 start*/
             $("#send").click(function(){
+                var uname = sessionStorage.getItem("nickName");
                 var msg = $("#text").val();
                 if(msg.trim().length != 0){
-                    that.socket.emit('postMsg', msg); //消息发送到服务器
+                    that.socket.emit('postMsg', uname, msg); //消息发送到服务器
                     that.showMsg('我', msg); //把自己的消息显示到自己的窗口中
-
                 }
                 $("#text").val("");
             });
@@ -95,8 +96,17 @@ Chat.prototype = {
             /* 发送信息 end*/
 
             //消息展示
+            this.socket.on("onceLogin",function(users,userCount){
+                var all = [];
+                for(var i = 0;i<users.length;i++){
+                    var user = '<li class="list-group-item">'+users[i]+'</li>';
+                    all.push(user);
+                }
+                $(".showUser span").text(userCount);//显示在线人数
+                $(".showUser ul").html(all.join(""));//显示在线用户列表
+            });
             this.socket.on("newMsg",function(user,msg){
-                that.showMsg(user,msg);
+                 that.showMsg(user,msg);
             });
             //发送图片
             $("#sendImage1").change(function(){
@@ -168,11 +178,3 @@ Chat.prototype = {
     }
 
 };
-
-
-
-
-
-
-
-
