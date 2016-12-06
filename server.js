@@ -31,7 +31,7 @@ io.on("connection",function(socket){
     //接收新信息并发送给除自己以外的人
     socket.on("postMsg",function(uname,msg){
         if(users.indexOf(uname)!= -1){
-            return false;
+           users = users;
         }else{
             socket.userIndex = users.length;
             users.push(uname);//增加新用户
