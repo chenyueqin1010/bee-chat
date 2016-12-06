@@ -10,7 +10,7 @@ server.listen(process.env.PORT || 3000);
 var users = [];//保存用户列表
 io.on("connection",function(socket){
     //接收浏览器发送的事件
-    socket.on("login",function(nickName){console.log(nickName)
+    socket.on("login",function(nickName){
         if(users.indexOf(nickName)!= -1){
             socket.emit("Existed");
         }else{
