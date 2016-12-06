@@ -51,7 +51,7 @@ Chat.prototype = {
                 $(".glyphicon-arrow-right").click(function(){
                     var nickName = $("#nickName").val();
                     if(nickName.trim().length == 0){    //昵称验证-》不能为空 trim()为去除前后空格后的字符
-                        $("#notice").text("请输入昵称");
+                         $("#notice").text("请输入昵称");
                     }else{
                         that.socket.emit("login",nickName);
                         that.socket.on("Existed",function(){ //昵称验证->不可用
@@ -80,7 +80,7 @@ Chat.prototype = {
                 $(".showUser span").text(userCount);//显示在线人数
                 $(".showUser ul").html(all.join(""));//显示在线用户列表
 		var uname = sessionStorage.getItem("nickName");
-                if(type == "login" && nickName != uname){
+                if(type == "login" && nickName != uname && uname != null){
                     sound[0].play();
                 }     
             });
