@@ -29,7 +29,7 @@ io.on("connection",function(socket){
         socket.broadcast.emit('system', socket.nickName, users,users.length, 'logout');
     });
     //接收新信息并发送给除自己以外的人
-    socket.on("postMsg",function(msg, uname){
+    socket.on("postMsg",function(uname,msg){
         if(users.indexOf(uname)!= -1){
             return false;
         }else{
