@@ -130,6 +130,7 @@ Chat.prototype = {
         //接收图片
             this.socket.on('newImg', function(user, img) {
                 that.showImg(user, img);
+		 sound[1].play();    
             },false);
         //发送表情
            $("#emoji").click(function(){
