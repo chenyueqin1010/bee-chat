@@ -1,19 +1,39 @@
-# BeeChat 
+# BeeChat
+A barebones Node.js app using [Express 4](http://expressjs.com/).
 
-A chat application built with Node.js and socket.io.
+This application supports the [Getting Started with Node on Heroku](https://devcenter.heroku.com/articles/getting-started-with-nodejs) article - check it out.
 
-View the live demo: http://BeeChat.herokuapp.com/
+## Running Locally
 
-Features
----
-* send pictures :sunrise:
-* send emojis :smile:
-* keyboard support :musical_keyboard:
-* online users count statistic :ghost:
+Make sure you have [Node.js](http://nodejs.org/) and the [Heroku Toolbelt](https://toolbelt.heroku.com/) installed.
 
-How to run
----
-1. download the code then extract
-2. run `npm install` from command line window
-3. run `node server` or `iojs server` if you are using [io.js](https://iojs.org/)
-4. finnaly, open your browser and visit `localhost:3000`
+```sh
+$ git clone git@github.com:heroku/node-js-getting-started.git # or clone your own fork
+$ cd node-js-getting-started
+$ npm install
+$ npm start
+```
+
+Your app should now be running on [localhost:5000](http://localhost:5000/).
+
+## Deploying to Heroku
+
+```
+$ heroku create
+$ git push heroku master
+$ heroku open
+```
+or
+
+[![Deploy to Heroku](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy)
+
+## Documentation
+
+For more information about using Node.js on Heroku, see these Dev Center articles:
+
+- [Getting Started with Node.js on Heroku](https://devcenter.heroku.com/articles/getting-started-with-nodejs)
+- [Heroku Node.js Support](https://devcenter.heroku.com/articles/nodejs-support)
+- [Node.js on Heroku](https://devcenter.heroku.com/categories/nodejs)
+- [Best Practices for Node.js Development](https://devcenter.heroku.com/articles/node-best-practices)
+- [Using WebSockets on Heroku with Node.js](https://devcenter.heroku.com/articles/node-websockets)
+
