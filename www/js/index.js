@@ -28,11 +28,19 @@ $("#quit").click(function(){
         }
     }return false;
 });
-
-var sound=[];
-	 sound[0]=new Audio("sounds/online.wav");
-	 sound[1]=new Audio("sounds/message.wav");
-
+//声音
+var sound=[],volumes = 1;
+sound[0]=new Audio("sounds/online.wav");
+sound[1]=new Audio("sounds/message.wav");
+$("#silent").click(function(){//静音功能
+    if($(this).hasClass("glyphicon-volume-up")){
+        $(this).removeClass("glyphicon-volume-up").addClass("glyphicon-volume-off");
+        volumes = 0;
+    }else{
+        $(this).removeClass("glyphicon-volume-off").addClass("glyphicon-volume-up");
+        volumes = 1;
+    }
+});
 Chat.prototype = {
     //初始化函数
     init: function(){
@@ -51,7 +59,7 @@ Chat.prototype = {
                 $(".glyphicon-arrow-right").click(function(){
                     var nickName = $("#nickName").val();
                     if(nickName.trim().length == 0){    //昵称验证-》不能为空 trim()为去除前后空格后的字符
-                         $("#notice").text("请输入昵称");
+                        $("#notice").text("请输入昵称");
                     }else{
                         that.socket.emit("login",nickName);
                         that.socket.on("Existed",function(){ //昵称验证->不可用
@@ -79,10 +87,11 @@ Chat.prototype = {
                 $(".showBox ul").append(userType); //广播用户行为
                 $(".showUser span").text(userCount);//显示在线人数
                 $(".showUser ul").html(all.join(""));//显示在线用户列表
-		var uname = sessionStorage.getItem("nickName");
+                var uname = sessionStorage.getItem("nickName");
                 if(type == "login" && nickName != uname && uname != null){
+                    sound[0].volume = volumes;
                     sound[0].play();
-                }     
+                }
             });
             //消息发送
             /*发送信息 start*/
@@ -115,7 +124,8 @@ Chat.prototype = {
             });
             this.socket.on("newMsg",function(user,msg){
                  that.showMsg(user,msg);
-                 sound[1].play();
+                sound[1].volume = volumes;
+                sound[1].play();
             });
             //发送图片
             $("#sendImage1").change(function(){
@@ -134,7 +144,8 @@ Chat.prototype = {
         //接收图片
             this.socket.on('newImg', function(user, img) {
                 that.showImg(user, img);
-		 sound[1].play();    
+                sound[1].volume = volumes;
+                sound[1].play();
             },false);
         //发送表情
            $("#emoji").click(function(){
