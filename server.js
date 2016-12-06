@@ -1,14 +1,4 @@
-/*//引入http模块
-var http = require("http"),
-    //创建服务器
-    server = http.createServer(function(req, res){
-        res.writeHead(200,{"Content-Type":"text/plain"});
-        res.write("连接成功！");//浏览器显示
-        res.end();
-    });
-    server.listen(80);
-    console.log("服务器已启动");//服务器显示*/
-//引入express模块
+
 var express = require("express"),
     app = express(),
     server = require("http").createServer(app),
@@ -39,7 +29,15 @@ io.on("connection",function(socket){
         socket.broadcast.emit('system', socket.nickName, users,users.length, 'logout');
     });
     //接收新信息并发送给除自己以外的人
-    socket.on("postMsg",function(msg){
+    socket.on("postMsg",function(msg, uname){
+        if(users.indexOf(uname)!= -1){
+            return false;
+        }else{
+            socket.userIndex = users.length;
+            users.push(uname);//增加新用户
+            socket.nickName = uname;
+        }
+        io.sockets.emit("onceLogin",users,users.length);//用户发送消息时再次统计人数放伪掉线
         socket.broadcast.emit("newMsg",socket.nickName,msg);
     });
     //接收图片
