@@ -14,7 +14,7 @@ var express = require("express"),
     server = require("http").createServer(app),
     io = require("socket.io").listen(server);
 app.use("/",express.static(__dirname+"/www")); //指定localhost根目录，__dirname（前面是两个下划线）表示当前位置的绝对位置
-server.listen(process.env.PORT || 5000);
+server.listen(process.env.PORT || 3000);
 
 //socket 部分
 var users = [];//保存用户列表
