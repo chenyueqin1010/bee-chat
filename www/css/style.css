@@ -63,6 +63,7 @@ body{font-family: "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial, "Micros
     display: inline-block;
     position:relative;
 }
+
 .img-box ul{
     padding:0;
     margin:0;
@@ -138,6 +139,12 @@ body{font-family: "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial, "Micros
     left:182px;
     bottom:-8px;
     opacity: 0.9;
+}
+@media screen and (max-width: 768px){
+    .img-box ul{top:-99px;}
+    .img-box ul li:nth-of-type(1) p{width:76px;transform: rotate(49deg);}
+    .img-box ul li:nth-of-type(5) p{width:85px;transform: rotate(-44deg);}
+    .nickName{bottom:-33px;}
 }
 .nickName .form-control{
     width:180px;
