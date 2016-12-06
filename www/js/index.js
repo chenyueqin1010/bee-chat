@@ -29,6 +29,10 @@ $("#quit").click(function(){
     }return false;
 });
 
+var sound=[];
+	 sound[0]=new Audio("sounds/online.wav");
+	 sound[1]=new Audio("sounds/message.wav");
+
 Chat.prototype = {
     //初始化函数
     init: function(){
@@ -107,6 +111,7 @@ Chat.prototype = {
             });
             this.socket.on("newMsg",function(user,msg){
                  that.showMsg(user,msg);
+                 sound[1].play();
             });
             //发送图片
             $("#sendImage1").change(function(){
