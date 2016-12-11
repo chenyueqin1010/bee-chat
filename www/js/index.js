@@ -174,12 +174,12 @@ Chat.prototype = {
         msg = this.showEmoji(msg);
         var newMsg = '<li class="list-group-item"> <span class="uname text-danger">'+user+'</span>：<span class="content">'+msg+'</span> </li>';
         $(".showBox ul").append(newMsg);
-        $(".showBox .list-group").scrollTop = $(".showBox .list-group")[0].scrollHeight;
+         $(".showBox .list-group").scrollTop(99999999999*9999999999);
     },
     showImg:function(user,img){
         var newImg = '<li class="list-group-item">'+user+'：<br/><img class="img-responsive" style="max-width: 80%;"src="'+img+'"></li>';
         $(".showBox ul").append(newImg);
-        $(".showBox .list-group").scrollTop = $(".showBox .list-group")[0].scrollHeight;
+         $(".showBox .list-group").scrollTop(99999999999*9999999999);
     },
     emoji:function(){
         var emojis = [];
@@ -196,6 +196,7 @@ Chat.prototype = {
             emoji = emoji.replace(match[0],'<img class="emoji" src="images/emoji/'+emojiIndex+'.gif">');
         }
         return emoji;
+         $(".showBox .list-group").scrollTop(99999999999*9999999999);
     }
 
 };
