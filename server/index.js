@@ -1,19 +1,9 @@
-const fs = require('fs'); // node自带的fs模块
-// 定义一个处理器，当访问localhost:3000时，执行此函数，返回index.html文件
-const handler = (req, res) => {
-	fs.readFile(__dirname + '/www/index.html',
-		(err, data) => {
-			if (err) {
-				res.writeHead(500);
-				return res.end('Error loading index.html');
-			}
+const express = require("express");
+const app = express();
 
-			res.writeHead(200);
-			res.end(data);
-		});
-}
+app.use("/", express.static(__dirname + "/www")); //指定localhost根目录，__dirname（前面是两个下划线）表示当前位置的绝对位置
 
-const httpServer = require('http').createServer(handler); // 使用了node自带的http模块
+const httpServer = require('http').createServer(app); // 使用了node自带的http模块
 const io = require('socket.io')(httpServer, {
 	maxHttpBufferSize: 1e8 //限制文件传输大小100MB
 
