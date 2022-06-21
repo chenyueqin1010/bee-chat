@@ -11,3 +11,9 @@
 ![](https://chenyueqin1010.github.io/bee-chat/server/demo/4.png)
 ![](https://chenyueqin1010.github.io/bee-chat/server/demo/5.png)
 ![](https://chenyueqin1010.github.io/bee-chat/server/demo/6.png)
+
+<style>
+img{
+  width:400px;
+}
+</style>
