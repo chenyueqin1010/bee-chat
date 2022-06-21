@@ -1,7 +1,7 @@
 <template>
 	<!-- 信息展示板组件 -->
 	<div class="q-pa-md row justify-center">
-		<q-virtual-scroll ref="VScroll" style="max-height: 100%;" :items="messages" separator v-slot="{ item, index }">
+		<q-virtual-scroll ref="scrollRef" style="max-height: 100%;" :items="messages" separator v-slot="{ item, index }">
 			<q-chat-message :key="index" :sent="item.user.nickName===userInfo.nickName">
 				<template v-slot:avatar>
 					<q-avatar :class="{'avatar-self': item.user.nickName===userInfo.nickName}" :color="item.user.color"
@@ -33,9 +33,9 @@
 	import MessageItem from '@/components/MessageItem.vue';
 	
 	const userInfoStore = getUserInfoStore();
-	const currentInstance = getCurrentInstance();
 	const userInfo = userInfoStore.userInfo;
 	let messages = ref([]);
+	let scrollRef = ref(null);
 	
 	//展示消息
 	const showMessage = (data) => {
@@ -56,8 +56,8 @@
 	
 		//滚动到底部
 		setTimeout(() => {
-			currentInstance.ctx.$refs.VScroll.scrollTo(messages.value.length);
-		}, 100);
+			scrollRef.value.scrollTo(messages.value.length);
+		}, 300);
 	}
 	
 	//接收消息
