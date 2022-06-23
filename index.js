@@ -1,17 +1,14 @@
 const express = require("express");
 const app = express();
 
-app.use("/", express.static(__dirname + "/www")); //指定localhost根目录，__dirname（前面是两个下划线）表示当前位置的绝对位置
-
 const httpServer = require('http').createServer(app); // 使用了node自带的http模块
 const io = require('socket.io')(httpServer, {
 	maxHttpBufferSize: 1e8 //限制文件传输大小100MB
 
 });
+app.use("/", express.static(__dirname + "/www")); //指定localhost根目录，__dirname（前面是两个下划线）表示当前位置的绝对位置
 
-console.log('开始启动 server…');
-
-httpServer.listen(3000, () => {
+httpServer.listen(process.env.PORT || 3000, () => {
 	console.log('listening on *:3000');
 }); // 监听3000端口
 
