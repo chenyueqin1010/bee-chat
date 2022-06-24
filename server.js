@@ -8,8 +8,8 @@ const io = require('socket.io')(httpServer, {
 });
 
 //开启gzip压缩
-const compression = require('compression');
-app.use(compression());
+/* const compression = require('compression');
+app.use(compression()); */
 
 app.use("/", express.static(__dirname + "/www")); //指定localhost根目录，__dirname（前面是两个下划线）表示当前位置的绝对位置
 
