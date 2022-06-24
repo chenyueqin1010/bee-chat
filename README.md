@@ -2,7 +2,7 @@
 
 ### 聊天室地址：
 
-[https://bee-chat-v2.herokuapp.com](https://bee-chat.herokuapp.com)
+[https://bee-chat-v2.herokuapp.com](https://bee-chat-v2.herokuapp.com)
 
 ### 效果图
 ![](https://chenyueqin1010.github.io/bee-chat/demo/1.png)
