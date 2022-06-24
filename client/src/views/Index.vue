@@ -93,6 +93,7 @@
 		});
 		userOnline.value = data;
 	});
+	//监听在线用户
 	socket.on('onlineUser', (data) => {
 		data.map((item, index) => {
 			if (item.nickName === userInfo.nickName) {

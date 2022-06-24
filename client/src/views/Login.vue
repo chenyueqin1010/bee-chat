@@ -28,9 +28,9 @@
 
 	const router = useRouter();
 	const $q = useQuasar();
-	
+
 	//断开后重连
-	onMounted(()=>{
+	onMounted(() => {
 		socket.disconnected && socket.connect();
 	});
 
@@ -82,13 +82,17 @@
 	getName();
 
 
+	import {
+		getUserInfoStore
+	} from '@/store/modules/userInfo'
+	const userInfoStore = getUserInfoStore();
 	//开始聊天
 	const submit = () => {
 		const info = {
 			nickName: nickName.value,
 			color: themeColor.value
 		}
-		
+
 		//检查用户名是否被占用
 		socket.emit('checkName', nickName.value, (isUsed) => {
 			//用户信息加密储存
@@ -98,11 +102,10 @@
 					message: '手慢了，换一个吧'
 				});
 			} else {
-				socket.emit('encryptData', info, data => {
-					localStorage.setItem('USER_INFO', data);
-					socket.emit('login', data, (data) => {
-						router.replace('/');
-					});
+				localStorage.setItem('USER_INFO', info);
+				socket.emit('login', info, () => {
+					userInfoStore.userInfo = info;
+					router.replace('/');
 				});
 			}
 		});

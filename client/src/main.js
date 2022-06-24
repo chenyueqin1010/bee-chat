@@ -6,6 +6,7 @@ import router from './router'
 import {
 	store
 } from './store'
+import '@/utils/global'
 
 import {
 	Quasar,
