@@ -11,7 +11,7 @@ const io = require('socket.io')(httpServer, {
 const compression = require('compression');
 app.use(compression());
 
-app.use("/", express.static(__dirname + "/www")); //指定localhost根目录，__dirname（前面是两个下划线）表示当前位置的绝对位置
+app.use("/", express.static(__dirname + "/client/dist")); //指定localhost根目录，__dirname（前面是两个下划线）表示当前位置的绝对位置
 
 httpServer.listen(process.env.PORT || 3000, () => {
 	console.log('listening on *:3000');

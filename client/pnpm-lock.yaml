@@ -9,7 +9,7 @@ specifiers:
   photoswipe: ^5.2.7
   pinia: ^2.0.9
   postcss-px-to-viewport: ^1.1.1
-  quasar: ^2.7.1
+  quasar: ^2.7.3
   rollup-plugin-visualizer: ^5.5.4
   sass: 1.32.0
   socket.io-client: ^4.5.1
@@ -25,13 +25,13 @@ dependencies:
   axios: registry.npmmirror.com/axios/0.25.0
   photoswipe: registry.npmmirror.com/photoswipe/5.2.7
   pinia: registry.npmmirror.com/pinia/2.0.11_vue@3.2.31
-  quasar: registry.npmmirror.com/quasar/2.7.1
+  quasar: registry.npmmirror.com/quasar/2.7.3
   socket.io-client: registry.npmmirror.com/socket.io-client/4.5.1
   vue: registry.npmmirror.com/vue/3.2.31
   vue-router: registry.npmmirror.com/vue-router/4.0.13_vue@3.2.31
 
 devDependencies:
-  '@quasar/vite-plugin': registry.npmmirror.com/@quasar/vite-plugin/1.0.9_e9ea824781dd85eabd29c72dd93c093f
+  '@quasar/vite-plugin': registry.npmmirror.com/@quasar/vite-plugin/1.0.9_041d87d2ed954ff5e259ab5e5193e5ba
   '@vitejs/plugin-vue': registry.npmmirror.com/@vitejs/plugin-vue/2.2.4_vite@2.8.5+vue@3.2.31
   '@vue/compiler-sfc': registry.npmmirror.com/@vue/compiler-sfc/3.2.31
   postcss-px-to-viewport: registry.npmmirror.com/postcss-px-to-viewport/1.1.1
@@ -98,7 +98,7 @@ packages:
     version: 1.13.6
     dev: false
 
-  registry.npmmirror.com/@quasar/vite-plugin/1.0.9_e9ea824781dd85eabd29c72dd93c093f:
+  registry.npmmirror.com/@quasar/vite-plugin/1.0.9_041d87d2ed954ff5e259ab5e5193e5ba:
     resolution: {integrity: sha512-i3tOXLu9SvBG/u/VH/vlPpwzU3QHVtogoSl23Y3i9Clgo6XCtm9mHB0XnQvsLQgNfUTkAKJPKnGwAPQd9uBu1A==, registry: http://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/@quasar/vite-plugin/-/vite-plugin-1.0.9.tgz}
     id: registry.npmmirror.com/@quasar/vite-plugin/1.0.9
     name: '@quasar/vite-plugin'
@@ -109,7 +109,7 @@ packages:
       vite: ^2.0.0
       vue: ^3.0.0
     dependencies:
-      quasar: registry.npmmirror.com/quasar/2.7.1
+      quasar: registry.npmmirror.com/quasar/2.7.3
       vite: registry.npmmirror.com/vite/2.8.5_sass@1.32.0
       vue: registry.npmmirror.com/vue/3.2.31
     dev: true
@@ -1098,10 +1098,10 @@ packages:
       picocolors: registry.npmmirror.com/picocolors/1.0.0
       source-map-js: registry.npmmirror.com/source-map-js/1.0.2
 
-  registry.npmmirror.com/quasar/2.7.1:
-    resolution: {integrity: sha512-V2FcD04nHE07p4p0YEeC3ZIA9kodyZ5wdZ+eXRZhUZ3cFugAneJ1D2WCyKoqwM4OReFCk/1jlqQxCCUaTU4X3g==, registry: http://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/quasar/-/quasar-2.7.1.tgz}
+  registry.npmmirror.com/quasar/2.7.3:
+    resolution: {integrity: sha512-4YQQP1FbfshXwav9QcOHpvSg4eME4iKzd85m4562EqcfuhRtycC/2WQg+cRxlEr43gEHM0uXaJmybNUWZpoYkw==, registry: http://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/quasar/-/quasar-2.7.3.tgz}
     name: quasar
-    version: 2.7.1
+    version: 2.7.3
     engines: {node: '>= 10.18.1', npm: '>= 6.13.4', yarn: '>= 1.21.1'}
     dev: false
 

@@ -18,7 +18,7 @@
 					</q-btn>
 				</div>
 				<div @contextmenu.prevent>
-					<q-btn round color="primary" glossy size="xl" text-color="white" icon="keyboard_voice"
+					<q-btn class="touch-action" round color="primary" glossy size="xl" text-color="white" icon="keyboard_voice"
 						@touchstart="startRecord" @touchend="endRecord" />
 				</div>
 			</q-card-section>
@@ -143,9 +143,9 @@
 
 	//关闭录音板
 	const closeRecorder = () => {
+		showRecorder.value = false;
 		MediaUtils.stop();
 		MediaUtils.closeStream(mediaStream);
-		showRecorder.value = false;
 	}
 
 	//发送语音

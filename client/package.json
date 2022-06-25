@@ -12,7 +12,7 @@
 		"axios": "^0.25.0",
 		"photoswipe": "^5.2.7",
 		"pinia": "^2.0.9",
-		"quasar": "^2.7.1",
+		"quasar": "^2.7.3",
 		"socket.io-client": "^4.5.1",
 		"vue": "^3.2.25",
 		"vue-router": "^4.0.12"

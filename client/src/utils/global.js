@@ -20,6 +20,6 @@ localStorage.setItem = (key, val) => {
 
 localStorage.getItem = (key) => {
 	const text = localStorage[key];
-	
+
 	return text ? decrypt(text) : null;
 }
