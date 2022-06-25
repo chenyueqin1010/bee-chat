@@ -18,15 +18,15 @@
 
 	//自动登录
 	const user = localStorage.getItem('USER_INFO');
-	
-	if(user){
+
+	if (user) {
 		userInfoStore.userInfo = JSON.parse(user);
-		
+
 		socket.emit('login', userInfoStore.userInfo, () => {
-			
+
 		});
 	}
-	
+
 
 	/* if (!user) {
 		localStorage.removeItem('USER_INFO');
@@ -46,5 +46,15 @@
 	#app {
 		width: 100%;
 		height: 100%;
+	}
+	
+	//禁用手机长按事件
+	.touch-action {
+		-webkit-touch-callout: none;
+		-webkit-user-select: none;
+		-khtml-user-select: none;
+		-moz-user-select: none;
+		-ms-user-select: none;
+		user-select: none;
 	}
 </style>

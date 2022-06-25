@@ -8,7 +8,7 @@
 			<img id="image_preview" :src="imageUrl" alt="拍照预览" v-show="imageUrl">
 
 			<div class="tip-text" v-show="videoTime<1 && !imageUrl && !videoUrl">轻触拍照，长按摄像</div>
-			<q-circular-progress v-show="!imageUrl && !videoUrl" :max="10000" :value="videoTime" size="80px"
+			<q-circular-progress class="touch-action" v-show="!imageUrl && !videoUrl" :max="10000" :value="videoTime" size="80px"
 				center-color="white" :thickness="0.22" color="green" track-color="grey-9" @contextmenu.prevent
 				@touchstart="startVideo()" @touchend.prevent="stopVideo()" />
 				
