@@ -31,7 +31,7 @@
 
 	<!-- 图片预览 -->
 	<div id="galleryID">
-		<a ref="imageBox" :href="imageData.url" target="_blank" :data-pswp-width="imageData.width"
+		<a ref="imageBoxRef" :href="imageData.url" target="_blank" :data-pswp-width="imageData.width"
 			:data-pswp-height="imageData.height" rel="noreferrer">
 		</a>
 	</div>
@@ -55,8 +55,6 @@
 	import {
 		format
 	} from 'quasar';
-
-	const currentInstance = getCurrentInstance();
 
 	let messageType = ref(''); //信息类型
 	let imageData = ref({});
@@ -162,11 +160,13 @@
 	import PhotoSwipeLightbox from 'photoswipe/lightbox';
 	import 'photoswipe/style.css';
 	let lightbox = null;
+	let imageBoxRef = ref(null);
+	
 	//图片预览
 	const imagePreview = (data) => {
 		if (lightbox) {
 			setTimeout(() => {
-				currentInstance.ctx.$refs.imageBox.click();
+				imageBoxRef.value.click();
 			}, 100);
 			return;
 		}
@@ -179,7 +179,7 @@
 		});
 		lightbox.init();
 		setTimeout(() => {
-			currentInstance.ctx.$refs.imageBox.click();
+			imageBoxRef.value.click();
 		}, 100);
 	}
 	

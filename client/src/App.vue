@@ -50,11 +50,11 @@
 	
 	//禁用手机长按事件
 	.touch-action {
-		-webkit-touch-callout: none;
+		/* -webkit-touch-callout: none;
 		-webkit-user-select: none;
 		-khtml-user-select: none;
 		-moz-user-select: none;
 		-ms-user-select: none;
-		user-select: none;
+		user-select: none; */
 	}
 </style>

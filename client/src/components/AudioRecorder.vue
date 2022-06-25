@@ -109,7 +109,7 @@
 		voiceFileUrl.value = '';
 
 		recordTimeout = setInterval(() => {
-			if (recordTime.value >= 5) {
+			if (recordTime.value >= 30) {
 				endRecord();
 				$q.notify({
 					position: 'top',
