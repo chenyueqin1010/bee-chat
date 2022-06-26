@@ -20,7 +20,6 @@
 </template>
 
 <script setup>
-	import socket from "@/utils/socket";
 	import {
 		getUserInfoStore
 	} from '@/store/modules/userInfo'
@@ -135,11 +134,13 @@
 		real_time_video.value.srcObject = null;
 		MediaUtils.closeStream(mediaStream);
 	}
-
+	
+	const emit = defineEmits(['showMessage']);
 	//发送视频
 	const sendVideo = () => {
 		const sendFile = imageUrl.value ? imageFile : videoFile;
 		const messageData = {
+			id: userInfo.nickName + new Date().getTime(),
 			user: userInfo,
 			text: [{
 				type: imageUrl.value ? sendFile.type : 'video', //audio/webm;codecs=opus
@@ -149,9 +150,7 @@
 			}]
 		}
 
-		socket.emit('message', messageData, data => {
-
-		});
+		emit('showMessage',messageData);
 		imageUrl.value = null;
 		videoUrl.value = null;
 		closeRecorder();

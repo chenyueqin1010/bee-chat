@@ -23,3 +23,31 @@ localStorage.getItem = (key) => {
 
 	return text ? decrypt(text) : null;
 }
+
+let audio = null;
+
+const audioPlay = (url) => {
+	if (!audio) {
+		audio = new Audio(url)
+	} else {
+		!audio.ended && audio.pause();
+		audio.src = url;
+	}
+	audio.play();
+}
+
+//播放音频
+export const AudioPlay = (url) => {
+	audioPlay(url);
+	//播放完毕
+	return new Promise(resolve => {
+		audio.addEventListener('ended', (e) => {
+			resolve(true);
+		});
+	});
+};
+
+//暂停播放音频
+export const AudioPause = () => {
+	audio && !audio.ended && audio.pause();
+}

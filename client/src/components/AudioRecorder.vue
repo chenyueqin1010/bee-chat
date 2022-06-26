@@ -14,12 +14,12 @@
 							<q-spinner-radio color="white" size="18px" />
 						</i>
 						<q-icon left name="rss_feed" v-show="!audioPlaying" />
-						<span>{{recordTime}}s</span>
+						<span>{{recordTime}}''</span>
 					</q-btn>
 				</div>
 				<div @contextmenu.prevent>
-					<q-btn class="touch-action" round color="primary" glossy size="xl" text-color="white" icon="keyboard_voice"
-						@touchstart="startRecord" @touchend="endRecord" />
+					<q-btn class="touch-action" round color="primary" glossy size="xl" text-color="white"
+						icon="keyboard_voice" @touchstart="startRecord" @touchend="endRecord" />
 				</div>
 			</q-card-section>
 
@@ -32,7 +32,6 @@
 </template>
 
 <script setup>
-	import socket from "@/utils/socket";
 	import {
 		getUserInfoStore
 	} from '@/store/modules/userInfo'
@@ -52,25 +51,29 @@
 
 	let voiceFile = null;
 	let voiceFileUrl = ref('');
-	let audioPlayer = null;
 	let audioPlaying = ref(false);
 
+
+	import {
+		AudioPlay,
+		AudioPause
+	} from '@/utils/global'
 	//播放语音
 	const playAudio = () => {
-		//防止重复播放
 		if (audioPlaying.value) {
 			return;
 		}
 
-		audioPlayer = new Audio(voiceFileUrl.value);
-		audioPlayer.play();
 		audioPlaying.value = true;
-
-		//播放完毕
-		audioPlayer.addEventListener('ended', (e) => {
-			audioPlaying.value = false;
-			audioPlayer = null;
+		AudioPlay(voiceFileUrl.value).then(ended => {
+			stopPlay();
 		});
+	}
+	
+	//停止播放录音
+	const stopPlay=()=>{
+		AudioPause();
+		audioPlaying.value = false;;
 	}
 
 	let mediaStream = null;
@@ -107,6 +110,7 @@
 		recording.value = true;
 		recordTime.value = 0;
 		voiceFileUrl.value = '';
+		stopPlay();
 
 		recordTimeout = setInterval(() => {
 			if (recordTime.value >= 30) {
@@ -143,14 +147,19 @@
 
 	//关闭录音板
 	const closeRecorder = () => {
+		stopPlay();
 		showRecorder.value = false;
 		MediaUtils.stop();
 		MediaUtils.closeStream(mediaStream);
 	}
+	
+	const emit = defineEmits(['showMessage']);
 
 	//发送语音
 	const sendVoice = () => {
+		stopPlay();
 		const messageData = {
+			id: userInfo.nickName + new Date().getTime(),
 			user: userInfo,
 			text: [{
 				type: 'audio', //audio/webm;codecs=opus
@@ -159,10 +168,8 @@
 				size: voiceFile.size
 			}]
 		}
-
-		socket.emit('message', messageData, data => {
-
-		});
+		
+		emit('showMessage',messageData);
 		closeRecorder();
 	}
 

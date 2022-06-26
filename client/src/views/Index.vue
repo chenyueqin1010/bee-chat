@@ -41,12 +41,12 @@
 
 		<q-page-container>
 			<!-- 信息展示板 -->
-			<MessageBoard />
+			<MessageBoard ref="msgRef" />
 		</q-page-container>
 	</q-layout>
 
 	<!-- 输入区域 -->
-	<InputField />
+	<InputField @showMessage="showMessage" />
 </template>
 
 <script setup>
@@ -95,6 +95,11 @@
 	});
 	//监听在线用户
 	socket.on('onlineUser', (data) => {
+		if (!data[0]) {
+			userOnline.value = data;
+			return;
+		}
+
 		data.map((item, index) => {
 			if (item.nickName === userInfo.nickName) {
 				data.unshift(data.splice(index, 1)[0]);
@@ -118,12 +123,19 @@
 		}
 		userOnline.value = data;
 	});
+
+	const msgRef = ref(null);
+	//本人发送消息展示
+	const showMessage = (data) => {
+		msgRef.value.showMessage(data);
+	}
 </script>
 
 <style type="text/css" lang="scss" scoped>
 	.q-page-container {
 		height: calc(100vh - 56px);
 	}
+
 	.drawer-header {
 		height: 50px;
 		line-height: 50px;

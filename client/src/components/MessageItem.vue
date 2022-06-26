@@ -4,11 +4,12 @@
 	<img v-if="messageType==='image'" :src="imageData.url" @click="imagePreview(imageData)" style="width: 120px;" />
 
 	<q-btn v-if="messageType==='audio'" color="teal" @click="playAudio()">
-		<i style="display: inline-block;margin-right: 17px;" v-show="audioData.playing">
+		<i style="display: inline-block;margin-right: 17px;"
+			v-show="messageStore.audioPlayingId===messageId && audioData.playing">
 			<q-spinner-radio color="white" size="18px" />
 		</i>
-		<q-icon left name="rss_feed" v-show="!audioData.playing" />
-		<span>{{audioData.duration}}s</span>
+		<q-icon left name="rss_feed" v-show="messageStore.audioPlayingId!==messageId || !audioData.playing" />
+		<span>{{audioData.duration}}''</span>
 	</q-btn>
 
 	<div class="videos" v-if="messageType==='video'" @click="playVideo(videoData.url)">
@@ -42,7 +43,8 @@
 			<q-btn class="close-btn" flat round color="white" icon="reply"
 				@click="videoDialog=false,videoRef.src=null" />
 
-			<video ref="videoRef" autoplay controls webkit-playsinline controlslist="nofullscreen" disablepictureinpicture></video>
+			<video ref="videoRef" autoplay controls webkit-playsinline controlslist="nofullscreen"
+				disablepictureinpicture></video>
 		</q-card>
 	</q-dialog>
 </template>
@@ -109,17 +111,19 @@
 		const {
 			humanStorageSize
 		} = format;
-		const { pad } = format;
+		const {
+			pad
+		} = format;
 		//小视频
 		if (msg.type === 'video') {
 			let blob = new Blob([msg.data], {
 				type: msg.type
 			});
 			const videoUrl = URL.createObjectURL(blob);
-			
+
 			videoData.value = {
 				url: videoUrl,
-				duration: pad(msg.duration<1?1:msg.duration,2)
+				duration: pad(msg.duration < 1 ? 1 : msg.duration, 2)
 			}
 
 			messageType.value = 'video';
@@ -161,7 +165,7 @@
 	import 'photoswipe/style.css';
 	let lightbox = null;
 	let imageBoxRef = ref(null);
-	
+
 	//图片预览
 	const imagePreview = (data) => {
 		if (lightbox) {
@@ -182,7 +186,7 @@
 			imageBoxRef.value.click();
 		}, 100);
 	}
-	
+
 	//视频播放
 	const playVideo = (url) => {
 		videoDialog.value = true;
@@ -192,21 +196,29 @@
 	}
 
 	let audioPlayer = null;
+
+	import {
+		AudioPlay,
+		AudioPause
+	} from '@/utils/global'
+	import {
+		getMessageStore
+	} from '@/store/modules/message'
+
+	const messageId = ref(new Date().getTime());
+	const messageStore = getMessageStore();
+
 	//语音播放
 	const playAudio = () => {
-		if (audioPlayer) {
-			audioPlayer.pause();
-			audioPlayer = null;
+		if (audioData.value.playing) {
 			audioData.value.playing = false;
+			AudioPause();
+			return;
 		}
-
-		audioPlayer = new Audio(audioData.value.url);
-		audioPlayer.play();
 		audioData.value.playing = true;
+		messageStore.audioPlayingId = messageId.value;
 
-		//播放完毕
-		audioPlayer.addEventListener('ended', (e) => {
-			audioPlayer = null;
+		AudioPlay(audioData.value.url).then(ended => {
 			audioData.value.playing = false;
 		});
 	}

@@ -3,7 +3,7 @@ const app = express();
 
 const httpServer = require('http').createServer(app); // 使用了node自带的http模块
 const io = require('socket.io')(httpServer, {
-	maxHttpBufferSize: 1e8 //限制文件传输大小100MB
+	maxHttpBufferSize: 100 * 1024 * 1024 //限制文件传输大小100MB
 
 });
 
@@ -80,9 +80,9 @@ io.on('connection', socket => {
 
 	//接收web端传递的消息
 	socket.on('message', (data, callback) => {
-		io.emit('message', data);
-		// socket.broadcast.emit('message', data);
-		callback();
+		// io.emit('message', data);
+		socket.broadcast.emit('message', data);
+		callback && callback(data.id);
 	});
 
 	//监听

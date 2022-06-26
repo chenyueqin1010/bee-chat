@@ -36,6 +36,7 @@ app.use(Quasar, {
 	config: {
 		notify: {
 			color: 'primary',
+			position: 'top',
 			timeout: 2500
 		}
 	},

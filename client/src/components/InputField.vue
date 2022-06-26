@@ -1,7 +1,8 @@
 <template>
 	<!-- 输入框组件 -->
 	<div class="input-filed">
-		<q-input ref="inputRef" v-model="text" placeholder="请输入内容" filled autogrow @keypress.enter.prevent="sendMessage">
+		<q-input ref="inputRef" v-model="text" placeholder="请输入内容" filled autogrow
+			@keypress.enter.prevent="sendMessage">
 			<template v-slot:prepend>
 				<q-icon name="mic" @click.prevent="openRecorder" />
 			</template>
@@ -35,10 +36,11 @@
 			</template>
 		</q-input>
 	</div>
-	<AudioRecorder ref="AudioRecorderRef" />
-	<VideoRecorder ref="VideoRecorderFef" />
+	<AudioRecorder ref="AudioRecorderRef" @showMessage="showMessage" />
+	<VideoRecorder ref="VideoRecorderFef" @showMessage="showMessage" />
 
-	<input class="file-chooser" ref="imageChooseRef" type="file" cap accept=".jpg,.jpeg,.png,.gif,.webp" @change="chooseImage" />
+	<input class="file-chooser" ref="imageChooseRef" type="file" cap accept=".jpg,.jpeg,.png,.gif,.webp"
+		@change="chooseImage" />
 	<input class="file-chooser" ref="fileChooseRef" type="file" @change="chooseFile" />
 </template>
 
@@ -50,6 +52,9 @@
 	import {
 		useQuasar
 	} from 'quasar'
+	import {
+		AudioPlay
+	} from '@/utils/global'
 	import AudioRecorder from '@/components/AudioRecorder.vue'
 	import VideoRecorder from '@/components/VideoRecorder.vue'
 
@@ -73,18 +78,17 @@
 			return;
 		}
 		const messageData = {
+			id: userInfo.nickName + new Date().getTime(),
 			user: userInfo,
 			text: [text.value]
 		}
 		text.value = '';
 
-		socket.emit('message', messageData, (data) => {
-
-		});
+		showMessage(messageData);
 	}
-	
+
 	//录音
-	const openRecorder = ()=>{
+	const openRecorder = () => {
 		AudioRecorderRef.value.openRecorder();
 	}
 
@@ -99,9 +103,10 @@
 		reader.readAsArrayBuffer(file); */
 
 		const messageData = {
+			id: userInfo.nickName + new Date().getTime(),
 			user: userInfo,
 			text: [{
-				type: file.type,
+				type: file.type ? file.type : file.name.split('.').pop(),
 				data: file,
 				name: file.name,
 				size: file.size,
@@ -109,8 +114,28 @@
 				height: file.height
 			}]
 		}
-		socket.emit('message', messageData, data => {
 
+		showMessage(messageData);
+	}
+
+	const emit = defineEmits(['showMessage']);
+	//自己发送、展示消息
+	const showMessage = (messageData) => {
+		AudioPlay('/audio/message_send.mp3');
+		emit('showMessage', {
+			...messageData,
+			...{
+				uploading: messageData.text[0].data ? true : false
+			}
+		});
+
+		messageData.text[0].data && socket.emit('message', {
+			id: messageData.id,
+			user: messageData.user
+		});
+
+		socket.emit('message', messageData, data => {
+			messageData.text[0].data && emit('showMessage', messageData);
 		});
 	}
 
@@ -142,14 +167,24 @@
 
 	//选择图片
 	const chooseImage = (data) => {
-		const file = data.target.files[0];
+		const file = data.target ? data.target.files[0] : data;
+
+		imageChooseRef.value.value = "";
+
+		if (file.size > 10 * 1024 * 1024) {
+			$q.notify({
+				type: 'warning',
+				message: '图片最大支持10MB'
+			});
+			return;
+		}
+
 		const reader = new FileReader();
 
 		reader.onload = async (res) => {
 			const imageMin = await imageCompress(res.target.result, file);
 
 			sendFile(imageMin);
-			// imageChooseRef.value = "";
 		}
 		reader.readAsDataURL(file);
 	}
@@ -158,9 +193,18 @@
 	const chooseFile = (data) => {
 		const file = data.target.files[0];
 
-		// fileChooseRef.value = "";
+		fileChooseRef.value.value = "";
+
+		if (file.size > 100 * 1024 * 1024) {
+			$q.notify({
+				type: 'warning',
+				message: '文件最大支持100MB'
+			});
+			return;
+		}
+
 		if (file.type.match('image')) {
-			chooseImage(data);
+			chooseImage(file);
 			return;
 		}
 
@@ -184,14 +228,14 @@
 	.file-chooser {
 		display: none;
 	}
-
 </style>
 <style>
 	.q-field--filled .q-field__control {
 		border-radius: 0;
 		align-items: end;
 	}
-	.q-field--highlighted .q-field__control:before{
-		background: none!important;
+
+	.q-field--highlighted .q-field__control:before {
+		background: none !important;
 	}
 </style>
