@@ -70,25 +70,25 @@
 	const messageFilter = () => {
 		const msg = props.message;
 		//图片
-		if (msg.type && msg.type.match('image')) {
-			let blob = msg.data; //本人发送-file
+		// if (msg.type && msg.type.match('image')) {
+		// 	let blob = msg.data; //本人发送-file
 
-			if (!msg.data.type) { //他人发送--arraybuffer
-				blob = new Blob([msg.data], {
-					type: msg.type
-				});
-			}
+		// 	if (!msg.data.type) { //他人发送--arraybuffer
+		// 		blob = new Blob([msg.data], {
+		// 			type: msg.type
+		// 		});
+		// 	}
 
-			const fileUrl = URL.createObjectURL(blob);
+		// 	const fileUrl = URL.createObjectURL(blob);
 
-			imageData.value = {
-				url: fileUrl,
-				width: msg.width,
-				height: msg.height
-			}
-			messageType.value = 'image';
-			return;
-		}
+		// 	imageData.value = {
+		// 		url: fileUrl,
+		// 		width: msg.width,
+		// 		height: msg.height
+		// 	}
+		// 	messageType.value = 'image';
+		// 	return;
+		// }
 
 
 		//语音

@@ -203,10 +203,10 @@
 			return;
 		}
 
-		if (file.type.match('image')) {
+		/* if (file.type.match('image')) {
 			chooseImage(file);
 			return;
-		}
+		} */
 
 		sendFile(file);
 	}
