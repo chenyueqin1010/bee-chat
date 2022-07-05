@@ -129,10 +129,10 @@
 			}
 		});
 
-		messageData.text[0].data && socket.emit('message', {
+		/* messageData.text[0].data && socket.emit('message', {
 			id: messageData.id,
 			user: messageData.user
-		});
+		}); */
 
 		socket.emit('message', messageData, data => {
 			messageData.text[0].data && emit('showMessage', messageData);
@@ -203,10 +203,10 @@
 			return;
 		}
 
-		/* if (file.type.match('image')) {
+		if (file.type.match('image')) {
 			chooseImage(file);
 			return;
-		} */
+		}
 
 		sendFile(file);
 	}
